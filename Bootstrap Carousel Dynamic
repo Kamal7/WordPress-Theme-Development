@@ -1,0 +1,69 @@
+	
+	    <section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            <div class="carousel-inner">
+			<?php  $class_active="active"; ?>
+			<?php $slider_post = new WP_Query(array(
+				'post_type' => 'slider_items',
+				'posts_per_page' => -1,
+			)); ?>
+			<?php 
+			
+			if($slider_post->have_posts()): ?>
+			
+			<?php 
+			$dots_battums = "";
+			$counter = 0;
+			while($slider_post->have_posts()): $slider_post->the_post(); ?>
+			<?php $slider_background_bg = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'slider_background_bg' );?>
+			<?php $sldier_background = get_post_meta($post->ID, 'sldier_background', true); ?>
+			<?php $slider_read_more = get_post_meta($post->ID, 'slider_read_more', true); ?>
+					
+                <div class="item <?php echo $class_active ;?>" style="background-image: url(<?php echo $slider_background_bg[0]; ?>)">
+                    <div class="container">
+                        <div class="row slide-margin">
+                            <div class="col-sm-6">
+                                <div class="carousel-content">
+                                    <h1 class="animation animated-item-1"><?php the_title(); ?></h1>
+                                    <h2 class="animation animated-item-2"><?php the_excerpt(); ?></h2>
+									
+									<?php if($slider_read_more): ?>
+                                    <a class="btn-slide animation animated-item-3" href="<?php echo $slider_read_more; ?>">Read More</a>
+									<?php else:  ?>
+                                    <a class="btn-slide animation animated-item-3" href="<?php the_permalink(); ?>">Read More</a>
+									<?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 hidden-xs animation animated-item-4">
+                                <div class="slider-img">
+                                    <img src="<?php echo $sldier_background; ?>" class="img-responsive">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!--/.item-->
+			
+			<?php $dots_battums .= '<li data-target="#main-slider" data-slide-to="'.$counter.'" class="'.$class_active.'"></li>'?>
+			<?php 
+			$counter++;
+			$class_active="";
+			endwhile;
+			endif;
+			?>
+            </div>
+			
+            <ol class="carousel-indicators">
+                <?php echo $dots_battums; ?>
+            </ol>
+			<!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="next hidden-xs" href="#main-slider" data-slide="next">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </section><!--/#main-slider-->
+	
