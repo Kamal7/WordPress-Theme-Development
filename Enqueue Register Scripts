@@ -1,0 +1,43 @@
+function corlate_scripts() {
+global $wp_styles;
+ 
+// Load the main stylesheet css:
+wp_enqueue_style( 'style', get_stylesheet_uri() );
+ 
+// Loads our main stylesheet css file.
+// Registering custom Stylesheet:
+wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1', 'all' );
+// Enqueue custom stylesheet:
+wp_enqueue_style( 'bootstrap', get_stylesheet_uri(), array(), '1', 'all' );
+ 
+// Load our IE-only stylesheet for all versions of IE:
+wp_enqueue_style( 'respond', 'https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js', array(), '1', 'all');
+$wp_styles-&amp;gt;add_data( 'respond', 'conditional', 'lt IE 9' );
+ 
+// Loads our main jquery file.
+wp_enqueue_script('jquery');
+ 
+// Masonry loaded on the wodrdpess defult
+wp_enqueue_script( 'jquery-masonry', array( 'jquery' ) );
+ 
+// Loads our custom jquery file.
+wp_enqueue_script( 'corlate-navigation', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1', true );
+}
+add_action( 'wp_enqueue_scripts', 'corlate_scripts' );
+============================================================================
+// Loads our main stylesheet css file.
+// Registering custom Styles:
+wp_register_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '1', 'all' );
+wp_register_style( 'bootstrap-theme', get_template_directory_uri() . '/css/bootstrap-theme.min.css', array(), '1', 'all' );
+wp_register_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '1', 'all' );
+ 
+// Enqueue custom Styles:
+wp_enqueue_style( 'bootstrap', get_stylesheet_uri(), array(), '1', 'all' );
+wp_enqueue_style( 'bootstrap-theme', get_stylesheet_uri(), array(), '1', 'all' );
+wp_enqueue_style( 'font-awesome', get_stylesheet_uri(), array(), '1', 'all' );
+====================================================================================
+// Loads our custom jquery file.
+wp_enqueue_script( 'corlate-navigation', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '1', true );
+====================================================================================
+// Masonry loaded on the wodrdpess defult
+wp_enqueue_script( 'jquery-masonry', array( 'jquery' ) );
